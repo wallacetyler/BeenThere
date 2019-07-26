@@ -155,6 +155,7 @@ class Register extends Component {
                                         type="radio"
                                         id="is_mentor"
                                         value="false"
+                                        checked={true}
                                     />
                                     <span>Peer</span>
                                 </label>
