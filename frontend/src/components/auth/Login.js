@@ -13,7 +13,8 @@ class Login extends Component {
         this.state = {
             email: "",
             password: "",
-            errors: {}
+            errors: {},
+			errorMessageVisability: false
         };
     }
 
@@ -28,6 +29,9 @@ class Login extends Component {
         if (nextProps.auth.isAuthenticated) {
           this.props.history.push("/dashboard"); // push user to dashboard when they login
         }
+		else {
+			this.setState({ errorMessageVisability: true });
+		}
         if (nextProps.errors) {
           this.setState({
             errors: nextProps.errors
@@ -86,7 +90,7 @@ class Login extends Component {
                                         invalid: errors.email || errors.emailnotfound
                                       })}
                                 />
-                                <label htmlFor="email">eMail</label>
+                                <label htmlFor="email">Email</label>
                                 <span className="red-text">
                                     {errors.email}
                                     {errors.emailnotfound}
@@ -128,6 +132,9 @@ class Login extends Component {
 								<p className="grey-text font-weight-light">
 									If you don't have an account, <Link to="/register">Register</Link> here!
 								</p>
+							</div>
+							<div className="col center" id="failed">
+								{ this.state.errorMessageVisability ? <p className="red-text font-weight-light">Invalid email or password.</p> : null } 
 							</div>
                         </form>
                     </div>

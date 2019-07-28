@@ -17,7 +17,9 @@ class Register extends Component {
             password: "",
             password2: "",
             is_mentor: false,
-            errors: {}
+            errors: {},
+			errorMessageEmailVisability: false,
+			errorMessagePassVisability: false
         };
     }
 
@@ -42,6 +44,11 @@ class Register extends Component {
 
     onSubmit = e => {
         e.preventDefault();
+
+		if (this.state.password != this.state.password2) {
+			this.setState({ errorMessagePassVisability: true });
+			return;
+		}
 
         const newUser = {
             user: {
@@ -115,7 +122,7 @@ class Register extends Component {
                                         invalid: errors.email
                                     })}
                                 />
-                                <label htmlFor="email">eMail</label>
+                                <label htmlFor="email">Email</label>
                                 <span className="red-text">{errors.email}</span>
                             </div>
                             <div className="input-field col">
@@ -147,16 +154,21 @@ class Register extends Component {
                                 <span className="red-text">{errors.password2}</span>
                             </div>
 							<div className="col center">
-								<div className="col s6">
+								<div className="col s8">
 									<p className="grey-text font-weight-light">
 										Are you going to be a mentor?
 									</p>
 								</div>
-								<div className="switch col s6">
+								<div className="switch col s4">
 									<label>
 										No
-										<input type="checkbox" />
-										<span className="lever"></span>
+										<input 
+											onChange={this.onChange}
+											type="checkbox"
+											id="is_mentor"
+											value="true"
+										/>
+										<span className="lever" style={{marginLeft:"5px", marginRight:"5px"}}></span>
 										Yes
 									</label>
 								</div>
@@ -180,6 +192,10 @@ class Register extends Component {
 								<p className="grey-text font-weight-light">
 									If you have an account, <Link to="/">Login</Link> here!
 								</p>
+							</div>
+							<div className="col center" id="failed">
+								{ this.state.errorMessageEmailVisability ? <p className="red-text font-weight-light">Email already in use!</p> : null } 
+								{ this.state.errorMessagePassVisability ? <p className="red-text font-weight-light">Passwords do not match!</p> : null } 
 							</div>
                         </form>
                     </div>
