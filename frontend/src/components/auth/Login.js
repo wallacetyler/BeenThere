@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import classnames from "classnames";
 
+import "./login.css";
+
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -57,22 +59,23 @@ class Login extends Component {
 
         return (
             <div className="container">
-                <div className="row">
-                    <div className="col s8 offset-s2">
-                        <Link to="/" className="btn-flat waves-effect">
-                            <i className="material-icons left">keyboard_backspace</i>
-                            Back to home
-                        </Link>
-                        <div className="col s12" style={{paddingLeft: "11.250px"}}>
-                            <h4>
-                                <b>Login</b> below
+				<div className="row justify-content-start h-50">
+					<div className="col-md-4" style={{marginTop:"100px", marginBottom:"100px"}}>
+						<img src="./beentherelogo2.png" alt="logo" className="img-fluid" />
+					</div>
+				</div>
+                <div className="row d-flex justify-content-end h-100">
+                    <div className="col-md-4 white shadow p-3 mb-5 rounded my-auto">
+                        <div className="col">
+                            <h4 className="text-center">
+                                Don't keep us waiting!
                             </h4>
-                            <p className="grey-text text-darken-1">
-                                Dont have an account? <Link to="/register">Register</Link>
+                            <p className="text-center font-weight-light">
+                                Login now!
                             </p>
                         </div>
                         <form noValidate onSubmit={this.onSubmit}>
-                            <div className="input-field col s12">
+                            <div className="input-field col">
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.email}
@@ -83,13 +86,13 @@ class Login extends Component {
                                         invalid: errors.email || errors.emailnotfound
                                       })}
                                 />
-                                <label htmlFor="email">Email</label>
+                                <label htmlFor="email">eMail</label>
                                 <span className="red-text">
                                     {errors.email}
                                     {errors.emailnotfound}
                                 </span>
                             </div>
-                            <div className="input-field col s12">
+                            <div className="input-field col">
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.password}
@@ -106,20 +109,26 @@ class Login extends Component {
                                     {errors.passwordincorrect}
                                 </span>
                             </div>
-                            <div className="col s12" style={{paddingLeft: "11.250px"}}>
+                            <div className="col center">
                                 <button
                                     style={{
                                         width: "150px",
                                         borderRadius: "3px",
                                         letterSpacing: "1.5px",
-                                        marginTop: "1rem"
+                                        marginTop: "1rem",
+										marginBottom: "5px"
                                     }}
                                     type="submit"
-                                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                                    className="rounded-pill btn btn-large waves-effect waves-light hoverable purple accent-1 border-light"
                                 >
                                     Login
                                 </button>
                             </div>
+							<div className="col center">
+								<p className="grey-text font-weight-light">
+									If you don't have an account, <Link to="/register">Register</Link> here!
+								</p>
+							</div>
                         </form>
                     </div>
                 </div>

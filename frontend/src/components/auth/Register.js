@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
 
+import "./login.css";
+
 class Register extends Component {
     constructor(props) {
         super(props);
@@ -61,22 +63,20 @@ class Register extends Component {
 
         return (
             <div className="container">
-                <div className="row">
-                    <div className="col s8 offset-s2">
-                        <Link to="/" className="btn-flat waves-effect">
-                            <i className="material-icons left">keyboard_backspace</i>
-                            Back to home
-                        </Link>
-                        <div className="col s12" style={{paddingLeft: "11.250px"}}>
-                            <h4>
-                                <b>Register</b> below
+				<div className="row justify-content-start h-50">
+					<div className="col-md-4" style={{marginTop:"100px"}}>
+						<img src="./beentherelogo2.png" alt="logo" className="img-fluid" />
+					</div>
+				</div>
+                <div className="row d-flex justify-content-end h-100">
+                    <div className="col-md-4 white shadow p-3 mb-5 rounded my-auto">
+                        <div className="col">
+                            <h4 className="text-center">
+                                Register here!
                             </h4>
-                            <p className="grey-text text-darken-1">
-                                Already have an account? <Link to="/login">Log in</Link>
-                            </p>
                         </div>
                         <form noValidate onSubmit={this.onSubmit}>
-                            <div className="input-field col s6">
+                            <div className="input-field col">
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.first_name}
@@ -90,7 +90,7 @@ class Register extends Component {
                                 <label htmlFor="first_name">First Name</label>
                                 <span className="red-text">{errors.first_name}</span>
                             </div>
-                            <div className="input-field col s6">
+                            <div className="input-field col">
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.last_name}
@@ -104,7 +104,7 @@ class Register extends Component {
                                 <label htmlFor="last_name">Last Name</label>
                                 <span className="red-text">{errors.last_name}</span>
                             </div>
-                            <div className="input-field col s12">
+                            <div className="input-field col">
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.email}
@@ -115,10 +115,10 @@ class Register extends Component {
                                         invalid: errors.email
                                     })}
                                 />
-                                <label htmlFor="email">Email</label>
+                                <label htmlFor="email">eMail</label>
                                 <span className="red-text">{errors.email}</span>
                             </div>
-                            <div className="input-field col s12">
+                            <div className="input-field col">
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.password}
@@ -132,7 +132,7 @@ class Register extends Component {
                                 <label htmlFor="password">Password</label>
                                 <span className="red-text">{errors.password}</span>
                             </div>
-                            <div className="input-field col s12">
+                            <div className="input-field col">
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.password2}
@@ -146,47 +146,41 @@ class Register extends Component {
                                 <label htmlFor="password2">Confirm Password</label>
                                 <span className="red-text">{errors.password2}</span>
                             </div>
-                            <div className="input-field col s6">
-                                <label>
-                                    <input 
-                                        onChange={this.onChange}
-                                        className="with-gap"
-                                        name="group1"
-                                        type="radio"
-                                        id="is_mentor"
-                                        value="false"
-                                        checked={true}
-                                    />
-                                    <span>Peer</span>
-                                </label>
-                            </div>
-                            <div className="input-field col s6">
-                                <label>
-                                    <input 
-                                        onChange={this.onChange}
-                                        className="with-gap"
-                                        name="group1"
-                                        type="radio"
-                                        id="is_mentor"
-                                        value="true"
-                                    />
-                                    <span>Mentor</span>
-                                </label>
-                            </div>
-                            <div className="col s12" style={{paddingLeft: "11.250px"}}>
+							<div className="col center">
+								<div className="col s6">
+									<p className="grey-text font-weight-light">
+										Are you going to be a mentor?
+									</p>
+								</div>
+								<div className="switch col s6">
+									<label>
+										No
+										<input type="checkbox" />
+										<span className="lever"></span>
+										Yes
+									</label>
+								</div>
+							</div>
+                            <div className="col center">
                                 <button
                                     style={{
                                         width: "150px",
                                         borderRadius: "3px",
                                         letterSpacing: "1.5px",
-                                        marginTop: "3rem"
+                                        marginTop: "1rem",
+										marginBottom: "5px"
                                     }}
                                     type="submit"
-                                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                                    className="rounded-pill btn btn-large waves-effect waves-light hoverable purple accent-1 border-light"
                                 >
-                                    Sign Up
+                                    Register
                                 </button>
                             </div>
+							<div className="col center">
+								<p className="grey-text font-weight-light">
+									If you have an account, <Link to="/">Login</Link> here!
+								</p>
+							</div>
                         </form>
                     </div>
                 </div>
