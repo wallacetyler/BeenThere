@@ -12,23 +12,18 @@ class Mentor extends Component {
 		return (
 			<div>
 				<div>
-					<span>{image}</span>
-					<span>{first_name}</span>
-					<span>{last_name[0]}</span>
+					<img src={image} /> {first_name} {last_name[0]}
 				</div>
 				<div>
-					<span>Tags:</span>
-					<span>
+					Tags:
 					{
 						tag_list.map((tag) => {
 							return tag;
 						})
 					}
-					</span>
 				</div>
 				<div>
-					<span>Bio:</span>
-					<span>{bio}</span>
+					Bio: {bio}
 				</div>
 				<div>
 					...

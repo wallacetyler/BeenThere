@@ -75,18 +75,15 @@ class MentorList extends Component {
 
 	render() {
 		return (
+			<center>
 			<div>
-				<h1>Mentors</h1>
+				<h3>Mentors</h3>
 				<SearchTag
 					searched_tag={this.state.searched_tag}
 					onSearchSubmit={this.onSearchSubmit}
 				/>
 				<div>
-					<span>There are |</span>
-					<span>{this.state.filtrdCount}</span>
-					<span>| mentors who tagged |</span>
-					<span>{this.state.searched_tag}</span>
-					<span>|</span>
+					There are {this.state.filtrdCount} mentors with this tag.
 				</div>
 				<div>
 					......
@@ -107,6 +104,7 @@ class MentorList extends Component {
 					})
 				}
 			</div>
+			</center>
 		);
 	}
 }

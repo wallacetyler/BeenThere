@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 class SearchTag extends Component {
 	constructor(props) {
 		super(props);
@@ -20,14 +21,16 @@ class SearchTag extends Component {
 				<hr />
 				{
 					<form onSubmit={this.onSearchSubmit}>
-						<h3>Search Tag:</h3>
+						Search Tag:
 						<input placeholder="Tag" ref={tagInput => this.tagInput = tagInput} />
 						<button>Search</button>
 					</form>
 				}
 				<div>
-					<span>current tag:</span>
-					<span>{searched_tag}</span>
+					current tag: {searched_tag}
+				</div>
+				<div>
+					Note: To get all tags search "all"
 				</div>
 				<hr />
 				<div>
