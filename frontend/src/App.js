@@ -10,8 +10,6 @@ import API from "./utils/API";
 import { Provider } from "react-redux";
 import store from "./store";
 
-import Navbar from "./components/layout/Navbar";
-import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Profile from "./components/profile/profile";
@@ -52,7 +50,7 @@ class App extends Component {
       if (decoded.exp < currentTime) {
         // Logout user
         store.dispatch(logoutUser());    // Redirect to login
-        window.location.href = "./login";
+        window.location.href = "/";
       }
     }
   }
@@ -65,9 +63,8 @@ class App extends Component {
             <Navbar 
               currentUser={this.props.user} 
             />
-            <Route exact path="/" component={Landing} />
+            <Route exact path="/" component={Login} />
             <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/profile" component={Profile} />
