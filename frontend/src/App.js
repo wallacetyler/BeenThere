@@ -14,6 +14,7 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
+import MentorList from "./components/mentorlist/MentorList";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -24,7 +25,7 @@ if (localStorage.jwtToken) {
   const decoded = jwt_decode(token);
   // Set user and isAuthenticated
   store.dispatch(setCurrentUser(decoded));
-  
+
   // Check for expired token
   const currentTime = Date.now() / 1000; // to get in milliseconds
 
@@ -47,6 +48,7 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
+							<PrivateRoute exact path="/mentors" component={MentorList} />
             </Switch>
           </div>
         </Router>
