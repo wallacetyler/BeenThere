@@ -83,7 +83,7 @@ userSchema.methods.toAuthJSON = function() {
         is_mentor: this.is_mentor,
         tag_list: this.tag_list,
         bio: this.bio,
-        image: this.image
+        image: this.image || 'https://static.productionready.io/images/smiley-cyrus.jpg'
     };
 };
 
