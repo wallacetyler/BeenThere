@@ -12,7 +12,8 @@ class Mentor extends Component {
 		return (
 			<div>
 				<div>
-					<img src={image} /> {first_name} {last_name[0]}
+					<img src={image} />
+					<a href="Link_to_the_Profile"> {first_name} {last_name[0]} </a>
 				</div>
 				<div>
 					Tags:
