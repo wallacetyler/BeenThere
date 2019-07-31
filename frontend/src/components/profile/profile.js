@@ -20,7 +20,8 @@ class Profile extends Component {
 			profileTagList: [],
 			profileAffiliateListString: "",
 			profileBio: '',
-			nameText: ""
+			nameText: "",
+			loading: true
         };
 		
 		axios.get("/api/profiles/" + profileObjectID).then(
@@ -32,7 +33,8 @@ class Profile extends Component {
 				profileMentor: (data.data.profile.is_mentor)?"Mentor":"Peer",
 				profileTagList: data.data.profile.tag_list,
 				profileAffiliateListString: data.data.profile.affiliate_list.join(", "),
-				profileBio: data.data.profile.bio
+				profileBio: data.data.profile.bio,
+				loading: false
 				});
 		})
 		.catch(error => {
@@ -49,6 +51,8 @@ class Profile extends Component {
       }
 	  
 	componentWillReceiveProps(props){
+		this.setState({ loading: true });
+	
 		var profileObjectID = props.location.search.substr(1);
 		var IsThisTheAuthenticatedUser = props.auth.user.id === profileObjectID;
 		
@@ -73,7 +77,8 @@ class Profile extends Component {
 				profileMentor: (data.data.profile.is_mentor)?"Mentor":"Peer",
 				profileTagList: data.data.profile.tag_list,
 				profileAffiliateListString: data.data.profile.affiliate_list.join(", "),
-				profileBio: data.data.profile.bio
+				profileBio: data.data.profile.bio,
+				loading: false
 				});
 		})
 		.catch(error => {
@@ -101,6 +106,9 @@ class Profile extends Component {
 	}
 
     render() {
+		if(this.state.loading)
+			return null;
+		
         return (
 			<div className="row" align="middle">
 				<div className="banner d-flex flex-column justify-content-center align-items-center">

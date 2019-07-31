@@ -18,7 +18,8 @@ class ProfileEditor extends Component {
 			profileTagList: [],
 			profileAffiliateList: [],
 			profileBio: '',
-			userID: props.auth.user.id
+			userID: props.auth.user.id,
+			loading: true
         };
 		
 		axios.get("/api/profiles/" + props.auth.user.id).then(
@@ -30,7 +31,8 @@ class ProfileEditor extends Component {
 				profileIsMentor: data.data.profile.is_mentor,
 				profileTagList: data.data.profile.tag_list,
 				profileAffiliateList: data.data.profile.affiliate_list,
-				profileBio: data.data.profile.bio
+				profileBio: data.data.profile.bio,
+				loading: false
 				});
 		})
 		.catch(error => {
@@ -107,6 +109,9 @@ class ProfileEditor extends Component {
 	}
 
     render() {
+		if(this.state.loading)
+			return null;
+	
         return (
 			<div>
 				<div className="banner d-flex flex-row justify-content-center align-items-center mb-3">
