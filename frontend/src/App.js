@@ -13,6 +13,9 @@ import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
+import Forum from "./components/post/forum.component";
+import CreatePost from "./components/post/create-post.component";
+import EditPost from "./components/post/edit-post.component";
 import Dashboard from "./components/dashboard/Dashboard";
 
 // Check for token to keep user logged in
@@ -47,6 +50,9 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/posts" component={Forum} />
+              <PrivateRoute exact path="/createpost" component={CreatePost} />
+              <PrivateRoute exact path="/editpost" component={EditPost} />
             </Switch>
           </div>
         </Router>
