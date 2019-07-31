@@ -42,13 +42,13 @@ class MentorList extends Component {
 	onSearchSubmit(tagInput) {
 		console.log("The input tag is: " + tagInput);
 		const mentors = this.getMentors();
-		if (tagInput === "all") {
+		if (tagInput === "") {
 		
 			this.setState({ searched_tag : tagInput , filtrdMentors : mentors , filtrdCount : mentors.length });
 		}
 		else {
 		
-			const foundMentors = mentors.filter(mentor => mentor.tag_list.filter(i => i === tagInput).length >= 1);
+			const foundMentors = mentors.filter(mentor => mentor.tag_list.filter(i => i.toLowerCase().includes(tagInput.toLowerCase())).length >= 1);
 			
 			this.setState({ searched_tag : tagInput , filtrdMentors : foundMentors , filtrdCount : foundMentors.length });
 		}
