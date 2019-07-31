@@ -12,6 +12,10 @@ div.profileCard {
 	border-radius: 5px;
 	padding: 0px;
 	width: 30%;
+	margin: auto;
+	background: white;
+	border: 1px solid #000;
+	border-radius: 5px;
 }
 
 p.editable {
@@ -34,6 +38,16 @@ p.editable {
     flex: 1;
 	min-width: 90%;
 	max-width: 90%;
+}
+.splitscreen .leftRadio {
+    flex: 1;
+	max-width: 50%;
+	min-width: 50%;
+}
+.splitscreen .rightRadio {
+    flex: 1;
+	min-width: 50%;
+	max-width: 50%;
 }
 .splitscreen .leftPicture {
     flex: 1;
