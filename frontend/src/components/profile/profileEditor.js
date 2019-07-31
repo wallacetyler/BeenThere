@@ -89,16 +89,20 @@ class ProfileEditor extends Component {
 	
 	doMentorRadioButtons() {
 		return(
-		<div>
-			<label className="container">Mentor
-				<input type="radio" checked={this.state.profileIsMentor?"checked":""} name="mentortype" ref={"mentorRef"} onClick={() => this.setRadioState(true)} readOnly={true}/>
-			  <span className="radio"></span>
-			</label>
+		<div className="splitscreen">
+			<div className="leftRadio">
+				<label className="container">Mentor
+					<input type="radio" checked={this.state.profileIsMentor?"checked":""} name="mentortype" ref={"mentorRef"} onClick={() => this.setRadioState(true)} readOnly={true}/>
+				  <span className="radio"></span>
+				</label>
+			</div>
 
-			<label className="container">Peer
-			  <input type="radio" checked={!this.state.profileIsMentor?"checked":""} name="mentortype" onClick={() => this.setRadioState(false)} readOnly={true}/>
-			  <span className="radio"></span>
-			</label>
+			<div className="rightRadio">
+				<label className="container">Peer
+				  <input type="radio" checked={!this.state.profileIsMentor?"checked":""} name="mentortype" onClick={() => this.setRadioState(false)} readOnly={true}/>
+				  <span className="radio"></span>
+				</label>
+			</div>
 		</div>
 		);
 	}
