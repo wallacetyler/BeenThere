@@ -28,7 +28,7 @@ class Navbar extends Component {
 	  return (
 		<nav className="navbar navbar-light">
             <div className="container">
-				<a class="navbar-brand" href="/">beenthere</a>
+				<a className="navbar-brand" href="/">beenthere</a>
 				<ul className="nav justify-content-end align-items-center">
 				  <li className="nav-item">
 					<Link to="" className="nav-link">
