@@ -28,6 +28,7 @@ class Navbar extends Component {
 	  return (
 		<nav className="navbar navbar-light">
             <div className="container">
+				<a class="navbar-brand" href="/">beenthere</a>
 				<ul className="nav justify-content-end align-items-center">
 				  <li className="nav-item">
 					<Link to="" className="nav-link">
@@ -35,8 +36,13 @@ class Navbar extends Component {
 					</Link>
 				  </li>
 				  <li className="nav-item">
+					<Link to="mentors" className="nav-link">
+					  Mentors
+					</Link>
+				  </li>
+				  <li className="nav-item">
 					<Link to="example" className="nav-link">
-					  <i className="ion-compose"></i>&nbsp;New Post
+					  Posts
 					</Link>
 				  </li>
 				  <li className="nav-item">

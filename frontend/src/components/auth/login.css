@@ -1,16 +1,7 @@
 html, body {
-	height: 100%;
-	overflow: hidden;
 }
 
 body {
-	background: url('loginbackground.png') no-repeat center center fixed;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	background-size: cover;
-	-o-background-size: cover;
-	height: 100%;
-	overflow: hidden;
 }
 
 .vertical-center {

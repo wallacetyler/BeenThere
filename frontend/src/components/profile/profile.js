@@ -61,28 +61,28 @@ class Profile extends Component {
 	
 	editProfileOption() {
 		if(this.state.isThisTheAuthenticatedUser)
-			return(<input type="image" align="right" src="https://icons-for-free.com/iconfiles/png/512/gear-131965017453293218.png" width="10%" onClick={this.editProfileClick} alt={this.profileFirst}/>);
+			return(<button type="button" className="btn btn-outline-dark btn-sm ml-auto" onClick={this.editProfileClick} alt={this.profileFirst}>Edit Profile</button>);
 		else 
 			return;
 	}
 
     render() {
         return (
-			
-		<div className="container">
 			<div className="row" align="middle">
-				<div className="profileCard" align="middle">
-					<img className="profilePic" src={this.state.profileImage} alt={this.profileFirst} width="50%"/>
-					<h4>{this.state.nameText}</h4>
-					<p className="title">{this.state.profileMentor}</p>
-					{this.affiliateInformation()}
-					<p>About <b>{this.state.nameText}</b>: {this.state.profileBio}</p>
+				<div className="banner d-flex flex-column justify-content-center align-items-center">
+					<img className="profilePic rounded-circle" src={this.state.profileImage} alt={this.profileFirst} width="50%"/>
+					<h4 className="m-2">{this.state.nameText}</h4>
+					<div className="d-flex flex-row">
+						{this.state.profileTagList.map(
+								x => <p className="badge badge-pill badge-light mr-2 mb-1">{x}</p>
+						)}
+					</div>
+				</div>
+				<div className="d-flex flex-column justify-content-center w-50 mx-auto">
+					<p className="p-4"><b>Bio</b>: {this.state.profileBio}</p>
 					{this.editProfileOption()}
-					
 				</div>
 			</div>
-		</div>
-
         );
     }
 }
