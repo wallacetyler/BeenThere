@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import classnames from "classnames";
 
-import "./login.css";
+import "./auth.css";
 
 class Login extends Component {
     constructor(props) {
@@ -62,80 +62,72 @@ class Login extends Component {
         const { errors } = this.state;
 
         return (
-            <div className="container">
-				<div className="row justify-content-start h-50">
-					<div className="col-md-4" style={{marginTop:"100px", marginBottom:"100px"}}>
-						<a class="login-brand" href="/">beenthere</a>
-					</div>
-				</div>
-                <div className="row d-flex justify-content-end h-100">
-                    <div className="col-md-4 white shadow p-3 mb-5 rounded my-auto">
-                        <div className="col">
-                            <h4 className="text-center">
-                                Don't keep us waiting!
-                            </h4>
-                            <p className="text-center font-weight-light">
-                                Login now!
-                            </p>
-                        </div>
+            <div className="container d-flex flex-row align-items-center">
+                <div className="d-flex align-items-center" style={{height: "100vh"}}>
+                    <a className="login-text text-align" href="/">a support group<br/>from people who've<br/><span className="login-brand">beenthere</span></a>
+                </div>
+                <div className="ml-auto d-flex align-items-center">
+                    <div>
+                        <h4>
+                            Welcome back,
+                        </h4>
+                        <p className="font-weight-light">
+                            please login to your account or register below.
+                        </p>
                         <form noValidate onSubmit={this.onSubmit}>
-                            <div className="input-field col">
+                            <div className="form-group">
+                                <label htmlFor="email">Email</label>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.email}
                                     error={errors.email}
                                     id="email"
-                                    type="text"
-                                    className={classnames("", {
+                                    type="email"
+                                    className={classnames("form-control", {
                                         invalid: errors.email || errors.emailnotfound
-                                      })}
+                                        })}
                                 />
-                                <label htmlFor="email">Email</label>
                                 <span className="red-text">
                                     {errors.email}
                                     {errors.emailnotfound}
                                 </span>
                             </div>
-                            <div className="input-field col">
+                            <div className="form-group">
+                                <label htmlFor="password">Password</label>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.password}
                                     error={errors.password}
                                     id="password"
                                     type="password"
-                                    className={classnames("", {
+                                    className={classnames("form-control", {
                                         invalid: errors.password || errors.passwordincorrect
-                                      })}
+                                        })}
                                 />
-                                <label htmlFor="password">Password</label>
                                 <span className="red-text">
                                     {errors.password}
                                     {errors.passwordincorrect}
                                 </span>
                             </div>
-                            <div className="col center">
+                            <div className="d-flex flex-row justify-content-start">
                                 <button
-                                    style={{
-                                        width: "150px",
-                                        borderRadius: "3px",
-                                        letterSpacing: "1.5px",
-                                        marginTop: "1rem",
-										marginBottom: "5px"
-                                    }}
                                     type="submit"
-                                    className="rounded-pill btn btn-large waves-effect waves-light hoverable purple accent-1 border-light"
+                                    className="btn btn-primary mr-2 login-btn"
                                 >
                                     Login
                                 </button>
+                                <Link to="/register">
+                                    <button
+                                        type="button"
+                                        className="btn btn-outline-dark"
+                                        >
+                                        Register
+                                    </button>
+                                </Link>
                             </div>
-							<div className="col center">
-								<p className="grey-text font-weight-light">
-									If you don't have an account, <Link to="/register">Register</Link> here!
-								</p>
-							</div>
-							<div className="col center" id="failed">
-								{ this.state.errorMessageVisability ? <p className="red-text font-weight-light">Invalid email or password.</p> : null } 
-							</div>
+                            <div className="col center" id="failed">
+                                { this.state.errorMessageVisability ? <p className="red-text font-weight-light">Invalid email or password.</p> : null } 
+                            </div>
                         </form>
                     </div>
                 </div>

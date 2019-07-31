@@ -95,7 +95,7 @@ class Profile extends Component {
 	
 	editProfileOption() {
 		if(this.state.isThisTheAuthenticatedUser)
-			return(<button type="button" className="btn btn-outline-dark btn-sm ml-auto" onClick={this.editProfileClick} alt={this.profileFirst}>Edit Profile</button>);
+			return(<button type="button" className="btn btn-outline-dark btn-sm m-auto" onClick={this.editProfileClick} alt={this.profileFirst}>Edit Profile</button>);
 		else 
 			return;
 	}
@@ -105,16 +105,16 @@ class Profile extends Component {
 			<div className="row" align="middle">
 				<div className="banner d-flex flex-column justify-content-center align-items-center">
 					<img className="profilePic rounded-circle" src={this.state.profileImage} alt={this.profileFirst} width="50%"/>
-					<h4 className="m-1">{this.state.nameText}</h4>
+					<h4 className="m-1 text-capitalize">{this.state.profileFirst} {this.state.profileLast.charAt(0)}</h4>
 					<h6 className="m-2">{this.state.profileMentor}</h6>
-					<div className="d-flex flex-row">
+					<div className="d-flex flex-row mt-1">
 						{this.state.profileTagList.map(
-								x => <p className="badge badge-pill badge-light mr-2 mb-1" key={x}>{x}</p>
+								x => <p className="badge badge-pill badge-light mr-2 mb-1 profile-pill" key={x}>{x}</p>
 						)}
 					</div>
 				</div>
 				<div className="d-flex flex-column justify-content-center w-50 mx-auto">
-					<p className="t-2 b-0"><b>Bio</b>: {this.state.profileBio}</p>
+					<p className="my-4"><b>Bio</b>: {this.state.profileBio}</p>
 					{this.affiliateInformation()}
 					{this.editProfileOption()}
 				</div>
