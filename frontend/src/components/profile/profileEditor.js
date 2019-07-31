@@ -49,6 +49,10 @@ class ProfileEditor extends Component {
 	onChange = e => {
 		this.setState({ [e.target.id]: e.target.value});
     };
+	
+	onChangeBio = e => {
+		this.setState({ profileBio: e.target.value});
+    };
 
 	backButtonClick() {
 		document.location.href = "/profile?" + this.state.userID;
@@ -89,8 +93,8 @@ class ProfileEditor extends Component {
 		{
 			return(
 				<div className="form-group">
-					<label htmlFor="bio">Are you affiliated with any companies? (comma seperated)</label>
-					<textarea className="form-control" id="affiliateList" rows="3" value={this.state.profileAffiliateList.join(', ')} ref={"profileAffiliateListRef"}></textarea>
+					<label htmlFor="affiliateList">Are you affiliated with any companies? (comma seperated)</label>
+					<textarea className="form-control" id="affiliateList" rows="3" defaultValue={this.state.profileAffiliateList.join(', ')} ref={"profileAffiliateListRef"}></textarea>
 				</div>
 			);
 		}
@@ -115,7 +119,7 @@ class ProfileEditor extends Component {
 							type="text"
 							className="form-control"
 							id="profilePic" 
-							value={this.state.profileImage}
+							defaultValue={this.state.profileImage}
 							onChange={this.onChange}
 							ref={"profileImageRef"}
 						></input>
@@ -123,25 +127,25 @@ class ProfileEditor extends Component {
 					<div className="form-row">
 						<div className="form-group col-md-6">
 							<label htmlFor="firstName">First Name</label>
-							<input type="text" className="form-control" id="firstName" value={this.state.profileFirst} ref={"firstNameRef"} onChange={this.onChange}></input>
+							<input type="text" className="form-control" id="firstName" defaultValue={this.state.profileFirst} ref={"firstNameRef"} onChange={this.onChange}></input>
 						</div>
 						<div className="form-group col-md-6">
 							<label htmlFor="lastName">Last Name</label>
-							<input type="text" className="form-control" id="lastName" value={this.state.profileLast} ref={"lastNameRef"} onChange={this.onChange}></input>
+							<input type="text" className="form-control" id="lastName" defaultValue={this.state.profileLast} ref={"lastNameRef"} onChange={this.onChange}></input>
 						</div>
 					</div>
 					<div className="form-check d-flex">
-						<input type="checkbox" className="form-check-input" id="mentor" value={this.state.profileIsMentor} onClick={() => this.assignMentorValue()} ref={"mentorRef"}></input>
+						<input type="checkbox" className="form-check-input" id="mentor" defaultChecked={this.state.profileIsMentor} onClick={() => this.assignMentorValue()} ref={"mentorRef"}></input>
 						<label className="form-check-label" htmlFor="mentor">Would you like to be considered a mentor? (your profile will be public)</label>
 					</div>
 					{this.doMentorInformation()}
 					<div className="form-group mt-3">
 						<label htmlFor="tags">Where have you been? (Tags comma separated)</label>
-						<input type="text" className="form-control" id="tags" value={this.state.profileTagList} ref={"profileTagRef"} onChange={this.onChange}></input>
+						<input type="text" className="form-control" id="tags" defaultValue={this.state.profileTagList} ref={"profileTagRef"} onChange={this.onChange}></input>
 					</div>
 					<div className="form-group">
 						<label htmlFor="bio">Explain more about yourself</label>
-						<textarea className="form-control" id="bio" rows="3" value={this.state.profileBio} ref={"profileBioRef"} onChange={this.onChange}></textarea>
+						<textarea className="form-control" id="bio" rows="3" value={this.state.profileBio} ref={"profileBioRef"} onChange={this.onChangeBio}></textarea>
 					</div>
 					<div className="d-flex flex-row-reverse">
 						<button className="btn btn-success ml-2" type="button" onClick={() => this.saveButtonClick()} alt="save button">
