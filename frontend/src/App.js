@@ -17,6 +17,7 @@ import Profile from "./components/profile/profile";
 import ProfileEditor from "./components/profile/profileEditor";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
+import MentorList from "./components/mentorlist/MentorList";
 import Example from "./components/example";
 
 class App extends Component {
@@ -53,6 +54,7 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
+							<PrivateRoute exact path="/mentors" component={MentorList} />
               <PrivateRoute exact path="/profile" component={Profile} />
               <PrivateRoute exact path="/profileEditor" component={ProfileEditor} />
               <PrivateRoute exact path="/example" component={Example} />
