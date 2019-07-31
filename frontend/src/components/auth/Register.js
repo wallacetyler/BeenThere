@@ -45,7 +45,7 @@ class Register extends Component {
     onSubmit = e => {
         e.preventDefault();
 
-		if (this.state.password != this.state.password2) {
+		if (this.state.password !== this.state.password2) {
 			this.setState({ errorMessagePassVisability: true });
 			return;
 		}

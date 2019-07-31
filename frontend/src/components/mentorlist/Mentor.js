@@ -7,21 +7,18 @@ class Mentor extends Component {
 	}
 
 	render() {
-		const { first_name, last_name, tag_list, bio, image } = this.props;
+		const { first_name, last_name, tag_list, bio, image, id } = this.props;
+		
+		const profileURL = "profile?"+id;
 
 		return (
 			<div>
 				<div>
-					<img src={image} />
-					<a href="Link_to_the_Profile"> {first_name} {last_name[0]} </a>
+					<img src={image} alt={last_name}/>
+					<a href={profileURL}> {first_name} {last_name} </a>
 				</div>
 				<div>
-					Tags:
-					{
-						tag_list.map((tag) => {
-							return tag;
-						})
-					}
+					Tags: {tag_list.join(", ")}
 				</div>
 				<div>
 					Bio: {bio}

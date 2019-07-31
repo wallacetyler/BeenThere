@@ -96,7 +96,8 @@ userSchema.methods.toProfileJSONFor = function(user) {
         is_mentor: this.is_mentor,
         tag_list: this.tag_list,
         bio: this.bio,
-        image: this.image || 'https://static.productionready.io/images/smiley-cyrus.jpg'
+        image: this.image || 'https://static.productionready.io/images/smiley-cyrus.jpg',
+		id: this._id
     };
 };
 

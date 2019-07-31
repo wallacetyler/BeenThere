@@ -27,7 +27,7 @@ class SearchTag extends Component {
 					</form>
 				}
 				<div>
-					current tag: {searched_tag}
+					Current tag: {searched_tag}
 				</div>
 				<div>
 					Note: To get all tags search "all"
