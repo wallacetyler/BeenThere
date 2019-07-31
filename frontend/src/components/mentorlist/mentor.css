@@ -1,0 +1,11 @@
+.mentor-img {
+    width: 100px;
+    height: 100px;
+}
+
+a.name {
+    text-decoration: none;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 32px;
+    color: darkslategray;
+}

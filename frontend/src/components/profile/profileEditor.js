@@ -48,6 +48,10 @@ class ProfileEditor extends Component {
         }
       }
 	
+	onChange = e => {
+		this.setState({ [e.target.id]: e.target.value});
+    };
+
 	backButtonClick() {
 		document.location.href = "/profile?" + this.state.userID;
 	}
@@ -129,59 +133,101 @@ class ProfileEditor extends Component {
 
     render() {
         return (
-			
-		<div className="container">
-			<div className="row" align="middle">
-				<div className="profileCard" minwidth="2500px">
-					<div className="splitscreen">
-						<div className="leftPicture">
-							<img className="profilePic" src={this.state.profileImage} alt={this.profileFirst}/>
-						</div>
-						<div className="rightPicture">
-							<p style={{float:'left'}} className="editable" contentEditable="true" ref={"profileImageRef"} suppressContentEditableWarning={true} onKeyPress={this.onURLChanged()}>{this.state.profileImage}</p>
-						</div>
-					</div>
-					<div className="splitscreen">
-						<div className="left">
-							<p>First Name:</p>
-						</div>
-						<div className="right">
-							<p style={{float:'left'}} className="editable" contentEditable="true" ref={"firstNameRef"} suppressContentEditableWarning={true}>{this.state.profileFirst}</p>
-						</div>
-					</div>
-					<div className="splitscreen">
-						<div className="left">
-							<p>Last Name:</p>
-						</div>
-						<div className="right">
-							<p style={{float:'left'}} className="editable" contentEditable="true" ref={"lastNameRef"} suppressContentEditableWarning={true}>{this.state.profileLast}</p>
-						</div>
-					</div>
-					
-					{this.doMentorRadioButtons()}
-					{this.doMentorInformation()}
-					
-					<div className="splitscreen">
-						<div className="left">
-							<p>Tags:</p>
-						</div>
-						<div className="right">
-							<p style={{float:'left'}} className="editable" contentEditable="true" ref={"profileTagRef"} suppressContentEditableWarning={true}>{this.state.profileTagList.join(", ")}</p>
-						</div>
-					</div>
-					<div className="splitscreen">
-						<div className="left">
-							<p>About Me:</p>
-						</div>
-						<div className="right">
-							<p style={{float:'left'}} className="editable" contentEditable="true" ref={"profileBioRef"} suppressContentEditableWarning={true}>{this.state.profileBio}</p>
-						</div>
-					</div>
-					<input type="image" align="right" src="https://cdn2.iconfinder.com/data/icons/apple-classic/100/Apple_classic_10Icon_5px_grid-04-512.png" width="10%" onClick={() => this.saveButtonClick()} alt="save button"/>
-					<input type="image" align="right" src="https://image.flaticon.com/icons/png/512/60/60577.png" width="10%" onClick={() => this.backButtonClick()} alt="back button"/>
+			<div>
+				<div className="banner d-flex flex-row justify-content-center align-items-center mb-3">
+					<h3>Edit Profile</h3>
 				</div>
+				<form className="mx-auto w-50">
+					<div className="form-group">
+						<label for="profilePic">Profile Picture</label>
+						<input 
+							type="text"
+							class="form-control"
+							id="profilePic" 
+							value={this.state.profileImage}
+							onChange={this.onChange}
+							ref={"profileImageRef"}
+						></input>
+					</div>
+					<div className="form-row">
+						<div className="form-group col-md-6">
+							<label for="firstName">First Name</label>
+							<input type="text" class="form-control" id="firstName" value={this.state.profileFirst}></input>
+						</div>
+						<div className="form-group col-md-6">
+							<label for="lastName">Last Name</label>
+							<input type="text" class="form-control" id="lastName" value={this.state.profileLast}></input>
+						</div>
+					</div>
+					<div className="form-check d-flex">
+						<input type="checkbox" class="form-check-input" id="mentor" value={this.state.profileIsMentor}></input>
+						<label className="form-check-label" for="mentor">Would you like to be considered a mentor, your profile will be public?</label>
+					</div>
+					<div className="form-group mt-3">
+						<label for="tags">Where have you been? (Tags comma separated)</label>
+						<input type="text" class="form-control" id="tags" value={this.state.profileTagList}></input>
+					</div>
+					<div className="form-group">
+						<label for="bio">Explain more about yourself</label>
+						<textarea className="form-control" id="bio" rows="3" value={this.state.profileBio}></textarea>
+					</div>
+					<div className="d-flex flex-row-reverse">
+						<button className="btn btn-success ml-2" type="button" onClick={() => this.saveButtonClick()} alt="save button">
+							Save
+						</button>
+						<button className="btn btn-dark ml-2" type="button" onClick={() => this.backButtonClick()} alt="back button">
+							Cancel
+						</button>
+					</div>
+
+						<div className="splitscreen">
+							<div className="leftPicture">
+								<img className="profilePic" src={this.state.profileImage} alt={this.profileFirst}/>
+							</div>
+							<div className="rightPicture">
+								<p style={{float:'left'}} className="editable" contentEditable="true" ref={"profileImageRef"} suppressContentEditableWarning={true} onKeyPress={this.onURLChanged()}>{this.state.profileImage}</p>
+							</div>
+						</div>
+						<div className="splitscreen">
+							<div className="left">
+								<p>First Name:</p>
+							</div>
+							<div className="right">
+								<p style={{float:'left'}} className="editable" contentEditable="true" ref={"firstNameRef"} suppressContentEditableWarning={true}>{this.state.profileFirst}</p>
+							</div>
+						</div>
+						<div className="splitscreen">
+							<div className="left">
+								<p>Last Name:</p>
+							</div>
+							<div className="right">
+								<p style={{float:'left'}} className="editable" contentEditable="true" ref={"lastNameRef"} suppressContentEditableWarning={true}>{this.state.profileLast}</p>
+							</div>
+						</div>
+						
+						{this.doMentorRadioButtons()}
+						{this.doMentorInformation()}
+						
+						<div className="splitscreen">
+							<div className="left">
+								<p>Tags:</p>
+							</div>
+							<div className="right">
+								<p style={{float:'left'}} className="editable" contentEditable="true" ref={"profileTagRef"} suppressContentEditableWarning={true}>{this.state.profileTagList.join(", ")}</p>
+							</div>
+						</div>
+						<div className="splitscreen">
+							<div className="left">
+								<p>About Me:</p>
+							</div>
+							<div className="right">
+								<p style={{float:'left'}} className="editable" contentEditable="true" ref={"profileBioRef"} suppressContentEditableWarning={true}>{this.state.profileBio}</p>
+							</div>
+						</div>
+						<input type="image" align="right" src="https://cdn2.iconfinder.com/data/icons/apple-classic/100/Apple_classic_10Icon_5px_grid-04-512.png" width="10%" onClick={() => this.saveButtonClick()} alt="save button"/>
+						<input type="image" align="right" src="https://image.flaticon.com/icons/png/512/60/60577.png" width="10%" onClick={() => this.backButtonClick()} alt="back button"/>
+			</form>
 			</div>
-		</div>
 		);
     }
 }

@@ -9,10 +9,10 @@
 .navbar-brand {
     text-decoration: none;
     font-family: 'Titillium Web', sans-serif;
-    font-style: bold;
+    font-weight: 600;
     font-size: 1.5em;
     padding: 0;
-    color: #5cb85c !important;
+    color: #d5a4cf !important;
 }
 
 .nav-link {

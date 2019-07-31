@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Mentor from './Mentor.js';
 import SearchTag from './SearchTag.js';
 
+import './mentor.css'
 
 const token = localStorage.getItem('jwtToken');
 
@@ -57,32 +58,33 @@ class MentorList extends Component {
 		return (
 			<center>
 			<div>
-				<h3>Mentors</h3>
+				<div className="banner d-flex flex-row justify-content-center align-items-center">
+					<h3>Mentors</h3>
+				</div>
 				<SearchTag
 					searched_tag={this.state.searched_tag}
 					onSearchSubmit={this.onSearchSubmit}
 				/>
-				<div>
+				<div className="alert alert-secondary w-50">
 					There are {this.state.filtrdCount} mentors with this tag.
 				</div>
 				<div>
-					......
-				</div>
 				{
 					this.state.filtrdMentors.map((mentor) => {
 						return (
-							<Mentor
-								key={mentor.id}
-								first_name={mentor.first_name}
-								last_name={mentor.last_name}
-								tag_list={mentor.tag_list}
-								bio={mentor.bio}
-								image={mentor.image}
-								id={mentor.id}
-							/>
+								<Mentor
+									key={mentor.id}
+									first_name={mentor.first_name}
+									last_name={mentor.last_name}
+									tag_list={mentor.tag_list}
+									bio={mentor.bio}
+									image={mentor.image}
+									id={mentor.id}
+								/>
 						);
 					})
 				}
+				</div>
 			</div>
 			</center>
 		);

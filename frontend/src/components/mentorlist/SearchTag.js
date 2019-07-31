@@ -18,24 +18,32 @@ class SearchTag extends Component {
 
 		return (
 			<div>
-				<hr />
 				{
-					<form onSubmit={this.onSearchSubmit}>
-						Search Tag:
-						<input placeholder="Tag" ref={tagInput => this.tagInput = tagInput} />
-						<button>Search</button>
+					<form 
+						onSubmit={this.onSearchSubmit}
+						className="d-flex flex-row justify-content-center align-items-center mb-3"
+					>
+						<label for="tagSearch" className="m-4">
+							Search Tag:
+						</label>
+						<input 
+							type="text"
+							placeholder="Tag"
+							ref={tagInput => this.tagInput = tagInput} 
+							className="form-control tagSearch w-25"
+						/>
+						<button
+							type="submit"
+							className="btn btn-secondary m-2"
+							style={{
+								backgroundColor: "#d5a4cf",
+								border: "none"
+							}}
+						>
+							Search
+						</button>
 					</form>
 				}
-				<div>
-					Current tag: {searched_tag}
-				</div>
-				<div>
-					Note: To get all tags search "all"
-				</div>
-				<hr />
-				<div>
-					......
-				</div>
 			</div>
   	);
 	}

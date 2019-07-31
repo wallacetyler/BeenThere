@@ -65,7 +65,7 @@ class Login extends Component {
             <div className="container">
 				<div className="row justify-content-start h-50">
 					<div className="col-md-4" style={{marginTop:"100px", marginBottom:"100px"}}>
-						<img src="./beentherelogo2.png" alt="logo" className="img-fluid" />
+						<a class="login-brand" href="/">beenthere</a>
 					</div>
 				</div>
                 <div className="row d-flex justify-content-end h-100">
