@@ -11,7 +11,7 @@ import {
 export const registerUser = (userData, history) => dispatch => {
   API
     .post("/api/users", userData)
-    .then(res => history.push("/login")) // re-direct to login on successful register
+    .then(res => history.push("/")) // re-direct to login on successful register
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -25,32 +25,37 @@ export const loginUser = userData => dispatch => {
   API
     .post("/api/users/login", userData)
     .then(res => {
-      console.log(res.data.user.token)
-      // Save to local storage
       const token  = res.data.user.token;
+      // Save to local storage
       localStorage.setItem("jwtToken", token);
       // Set token to Auth header
       setAuthToken(token);
       // Decode token to get user data
       const decoded = jwt_decode(token);
+      /*const data = {
+        user: res.data.user,
+        decoded: decoded
+      };*/
       // Set current user
       dispatch(setCurrentUser(decoded));
     })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err
       })
     );
 };
 
 // Set logged in user
-export const setCurrentUser = decoded => {
+export const setCurrentUser = data => {
   return {
     type: SET_CURRENT_USER,
-    payload: decoded
+    payload: data
   };
-};// User loading
+};
+
+// User loading
 export const setUserLoading = () => {
   return {
     type: USER_LOADING

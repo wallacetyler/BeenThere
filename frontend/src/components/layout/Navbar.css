@@ -1,0 +1,28 @@
+.avatar {
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 5px
+}
+
+.navbar-brand {
+    text-decoration: none;
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 600;
+    font-size: 1.5em;
+    padding: 0;
+    color: #d5a4cf !important;
+}
+
+.nav-link {
+    text-decoration: none;
+    margin: 0 0 0 16px;
+    color: lightslategrey;
+}
+
+.btn-link {
+    text-decoration: none;
+    padding: 0 0 0 16px;
+    color: lightslategrey;
+}
