@@ -63,7 +63,7 @@ router.get('/', auth.optional, function(req, res, next) {
         if (author) {
             query.author = author._id;
         }
-    });
+    }); 
 
     return Promise.all([
         Post.find(query)
@@ -78,6 +78,7 @@ router.get('/', auth.optional, function(req, res, next) {
         var posts = results[0];
         var postsCount = results[1];
         var user = results[2];
+
 
         return res.json({
             posts: posts.map(function(post) {
@@ -118,13 +119,12 @@ router.post('/', auth.required, function(req, res, next) {
         if (!user) {
             return res.sendStatus(401);
         }
-
+ 
         var post = new Post(req.body.post);
 
         post.author = user;
 
         return post.save().then(function() {
-            console.log(post.author);
             return res.json({
                 post: post.toJSONFor(user)
             });
@@ -148,8 +148,11 @@ router.get('/:post', auth.optional, function(req, res, next) {
 
 // Route to update posts
 router.put('/:post', auth.required, function(req, res, next) {
+			//console.log(req.post);
+			console.log(req.body);
     User.findById(req.payload.id).then(function(user) {
         if (req.post.author._id.toString() === req.payload.id.toString()) {
+		
             if (typeof req.body.post.title !== 'undefined') {
                 req.post.title = req.body.post.title;
             }
@@ -164,7 +167,7 @@ router.put('/:post', auth.required, function(req, res, next) {
 
             req.post.save().then(function(post) {
                 return res.json({
-                    post: post.toJSONFor(user)
+                    post: post.toJSONFor(user) 
                 });
             })
         }
