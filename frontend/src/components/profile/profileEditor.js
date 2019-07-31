@@ -141,7 +141,7 @@ class ProfileEditor extends Component {
 					{this.doMentorInformation()}
 					<div className="form-group mt-3">
 						<label htmlFor="tags">Where have you been? (Tags comma separated)</label>
-						<input type="text" className="form-control" id="tags" defaultValue={this.state.profileTagList} ref={"profileTagRef"} onChange={this.onChange}></input>
+						<input type="text" className="form-control" id="tags" defaultValue={this.state.profileTagList.join(", ")} ref={"profileTagRef"} onChange={this.onChange}></input>
 					</div>
 					<div className="form-group">
 						<label htmlFor="bio">Explain more about yourself</label>
