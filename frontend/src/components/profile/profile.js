@@ -52,7 +52,7 @@ class Profile extends Component {
 		if(this.state.profileAffiliateListString === "" || this.state.profileMentor === "Peer")
 			return;
 		else
-			return (<p>Affiliated with: {this.state.profileAffiliateListString}</p>);
+			return (<p className="t-0 b-2"><b>Affiliated with</b>: {this.state.profileAffiliateListString}</p>);
 	}
 	
 	editProfileClick() {
@@ -71,7 +71,8 @@ class Profile extends Component {
 			<div className="row" align="middle">
 				<div className="banner d-flex flex-column justify-content-center align-items-center">
 					<img className="profilePic rounded-circle" src={this.state.profileImage} alt={this.profileFirst} width="50%"/>
-					<h4 className="m-2">{this.state.nameText}</h4>
+					<h4 className="m-1">{this.state.nameText}</h4>
+					<h6 className="m-2">{this.state.profileMentor}</h6>
 					<div className="d-flex flex-row">
 						{this.state.profileTagList.map(
 								x => <p className="badge badge-pill badge-light mr-2 mb-1">{x}</p>
@@ -79,7 +80,8 @@ class Profile extends Component {
 					</div>
 				</div>
 				<div className="d-flex flex-column justify-content-center w-50 mx-auto">
-					<p className="p-4"><b>Bio</b>: {this.state.profileBio}</p>
+					<p className="t-2 b-0"><b>Bio</b>: {this.state.profileBio}</p>
+					{this.affiliateInformation()}
 					{this.editProfileOption()}
 				</div>
 			</div>
