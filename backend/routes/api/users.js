@@ -37,7 +37,6 @@ router.post('/users', function(req, res, next) {
 
 // Login route
 router.post('/users/login', function(req, res, next) {
-    debugger;
     if (!req.body.user.email) {
         return res.status(422).json({
             errors: { email: "Cannot be blank" }
@@ -60,7 +59,7 @@ router.post('/users/login', function(req, res, next) {
         if (user) {
             user.token = user.generateJWT();
             return res.json({ user: user.toAuthJSON()});
-        } 
+			} 
         else {
             return res.status(422).json(info);
         }
@@ -111,6 +110,10 @@ router.put('/user', auth.required, function(req, res, next) {
 
         if (typeof req.body.user.tag_list !== 'undefined') {
             user.tag_list = req.body.user.tag_list;
+        }
+		
+		if (typeof req.body.user.profile_image !== 'undefined') {
+            user.image = req.body.user.profile_image;
         }
 
         return user.save().then(function() {
