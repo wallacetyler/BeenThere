@@ -23,7 +23,7 @@ class SearchTag extends Component {
 						onSubmit={this.onSearchSubmit}
 						className="d-flex flex-row justify-content-center align-items-center mb-3"
 					>
-						<label for="tagSearch" className="m-4">
+						<label htmlFor="tagSearch" className="m-4">
 							Search Tag:
 						</label>
 						<input 

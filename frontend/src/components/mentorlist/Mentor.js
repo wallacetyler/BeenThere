@@ -22,7 +22,7 @@ class Mentor extends Component {
 						> {first_name.charAt(0).toUpperCase() + first_name.slice(1)} {last_name.charAt(0).toUpperCase()} </a>
 						<br />
 						{tag_list.map(
-							x => <p className="badge badge-pill badge-dark mr-2 mb-1">{x}</p>
+							x => <p className="badge badge-pill badge-dark mr-2 mb-1" key={x}>{x}</p>
 						)}
 						<p className="d-block text-truncate" style={{maxWidth: "400px"}}>{bio}</p>
 					</div>

@@ -37,8 +37,6 @@ class ProfileEditor extends Component {
 			console.log(error);
 			document.location.href = "/dashboard";
 		});
-		
-		this.fNameRef = React.createRef();
 	}
 
     componentDidMount() {
@@ -50,6 +48,10 @@ class ProfileEditor extends Component {
 	
 	onChange = e => {
 		this.setState({ [e.target.id]: e.target.value});
+    };
+	
+	onChangeBio = e => {
+		this.setState({ profileBio: e.target.value});
     };
 
 	backButtonClick() {
@@ -66,18 +68,18 @@ class ProfileEditor extends Component {
 				Authorization: "Token " + token
 			}
 		};
-		
+
 		const request = 
 		{
 			"user":
 			{
-				"first_name": this.refs.firstNameRef.innerText,
-				"last_name": this.refs.lastNameRef.innerText,
-				"profile_image": this.refs.profileImageRef.innerText,
-				"affiliate_list": (this.refs.mentorRef.checked)?this.refs.profileAffiliateListRef.innerText.split(", "):undefined,
+				"first_name": this.refs.firstNameRef.value,
+				"last_name": this.refs.lastNameRef.value,
+				"profile_image": this.refs.profileImageRef.value,
+				"affiliate_list": (this.refs.mentorRef.checked)?this.refs.profileAffiliateListRef.value.split(", "):undefined,
 				"is_mentor": this.refs.mentorRef.checked,
-				"tag_list": this.refs.profileTagRef.innerText.split(", "),
-				"bio": this.refs.profileBioRef.innerText
+				"tag_list": this.refs.profileTagRef.value.split(", "),
+				"bio": this.refs.profileBioRef.value
 			}
 		}
 		
@@ -86,49 +88,22 @@ class ProfileEditor extends Component {
 		.catch(e => console.log(e));
 	}
 	
-	setRadioState(state)
-	{
-		this.setState({profileIsMentor: state});
-	}
-	
-	doMentorRadioButtons() {
-		return(
-		<div className="splitscreen">
-			<div className="leftRadio">
-				<label className="container">Mentor
-					<input type="radio" checked={this.state.profileIsMentor?"checked":""} name="mentortype" ref={"mentorRef"} onClick={() => this.setRadioState(true)} readOnly={true}/>
-				  <span className="radio"></span>
-				</label>
-			</div>
-
-			<div className="rightRadio">
-				<label className="container">Peer
-				  <input type="radio" checked={!this.state.profileIsMentor?"checked":""} name="mentortype" onClick={() => this.setRadioState(false)} readOnly={true}/>
-				  <span className="radio"></span>
-				</label>
-			</div>
-		</div>
-		);
-	}
-	
 	doMentorInformation() {
 		if(this.state.profileIsMentor)
 		{
 			return(
-				<div className="splitscreen">
-					<div className="left">
-						<p>Affiliation:</p>
-					</div>
-					<div className="right">
-						<p style={{float:'left'}} className="editable" contentEditable="true" ref={"profileAffiliateListRef"} suppressContentEditableWarning={true}>{this.state.profileAffiliateList.join(", ")}</p>
-					</div>
+				<div className="form-group">
+					<label htmlFor="affiliateList">Are you affiliated with any companies? (comma seperated)</label>
+					<textarea className="form-control" id="affiliateList" rows="3" defaultValue={this.state.profileAffiliateList.join(', ')} ref={"profileAffiliateListRef"}></textarea>
 				</div>
 			);
 		}
 	}
 
-	onURLChanged() {
-		console.log("F");
+	assignMentorValue() {
+		
+		this.setState({ profileIsMentor: this.refs.mentorRef.checked});
+		console.log(this.state.profileIsMentor);
 	}
 
     render() {
@@ -139,37 +114,38 @@ class ProfileEditor extends Component {
 				</div>
 				<form className="mx-auto w-50">
 					<div className="form-group">
-						<label for="profilePic">Profile Picture</label>
+						<label htmlFor="profilePic">Profile Picture</label>
 						<input 
 							type="text"
-							class="form-control"
+							className="form-control"
 							id="profilePic" 
-							value={this.state.profileImage}
+							defaultValue={this.state.profileImage}
 							onChange={this.onChange}
 							ref={"profileImageRef"}
 						></input>
 					</div>
 					<div className="form-row">
 						<div className="form-group col-md-6">
-							<label for="firstName">First Name</label>
-							<input type="text" class="form-control" id="firstName" value={this.state.profileFirst}></input>
+							<label htmlFor="firstName">First Name</label>
+							<input type="text" className="form-control" id="firstName" defaultValue={this.state.profileFirst} ref={"firstNameRef"} onChange={this.onChange}></input>
 						</div>
 						<div className="form-group col-md-6">
-							<label for="lastName">Last Name</label>
-							<input type="text" class="form-control" id="lastName" value={this.state.profileLast}></input>
+							<label htmlFor="lastName">Last Name</label>
+							<input type="text" className="form-control" id="lastName" defaultValue={this.state.profileLast} ref={"lastNameRef"} onChange={this.onChange}></input>
 						</div>
 					</div>
 					<div className="form-check d-flex">
-						<input type="checkbox" class="form-check-input" id="mentor" value={this.state.profileIsMentor}></input>
-						<label className="form-check-label" for="mentor">Would you like to be considered a mentor, your profile will be public?</label>
+						<input type="checkbox" className="form-check-input" id="mentor" defaultChecked={this.state.profileIsMentor} onClick={() => this.assignMentorValue()} ref={"mentorRef"}></input>
+						<label className="form-check-label" htmlFor="mentor">Would you like to be considered a mentor? (your profile will be public)</label>
 					</div>
+					{this.doMentorInformation()}
 					<div className="form-group mt-3">
-						<label for="tags">Where have you been? (Tags comma separated)</label>
-						<input type="text" class="form-control" id="tags" value={this.state.profileTagList}></input>
+						<label htmlFor="tags">Where have you been? (Tags comma separated)</label>
+						<input type="text" className="form-control" id="tags" defaultValue={this.state.profileTagList.join(", ")} ref={"profileTagRef"} onChange={this.onChange}></input>
 					</div>
 					<div className="form-group">
-						<label for="bio">Explain more about yourself</label>
-						<textarea className="form-control" id="bio" rows="3" value={this.state.profileBio}></textarea>
+						<label htmlFor="bio">Explain more about yourself</label>
+						<textarea className="form-control" id="bio" rows="3" value={this.state.profileBio} ref={"profileBioRef"} onChange={this.onChangeBio}></textarea>
 					</div>
 					<div className="d-flex flex-row-reverse">
 						<button className="btn btn-success ml-2" type="button" onClick={() => this.saveButtonClick()} alt="save button">
@@ -179,54 +155,7 @@ class ProfileEditor extends Component {
 							Cancel
 						</button>
 					</div>
-
-						<div className="splitscreen">
-							<div className="leftPicture">
-								<img className="profilePic" src={this.state.profileImage} alt={this.profileFirst}/>
-							</div>
-							<div className="rightPicture">
-								<p style={{float:'left'}} className="editable" contentEditable="true" ref={"profileImageRef"} suppressContentEditableWarning={true} onKeyPress={this.onURLChanged()}>{this.state.profileImage}</p>
-							</div>
-						</div>
-						<div className="splitscreen">
-							<div className="left">
-								<p>First Name:</p>
-							</div>
-							<div className="right">
-								<p style={{float:'left'}} className="editable" contentEditable="true" ref={"firstNameRef"} suppressContentEditableWarning={true}>{this.state.profileFirst}</p>
-							</div>
-						</div>
-						<div className="splitscreen">
-							<div className="left">
-								<p>Last Name:</p>
-							</div>
-							<div className="right">
-								<p style={{float:'left'}} className="editable" contentEditable="true" ref={"lastNameRef"} suppressContentEditableWarning={true}>{this.state.profileLast}</p>
-							</div>
-						</div>
-						
-						{this.doMentorRadioButtons()}
-						{this.doMentorInformation()}
-						
-						<div className="splitscreen">
-							<div className="left">
-								<p>Tags:</p>
-							</div>
-							<div className="right">
-								<p style={{float:'left'}} className="editable" contentEditable="true" ref={"profileTagRef"} suppressContentEditableWarning={true}>{this.state.profileTagList.join(", ")}</p>
-							</div>
-						</div>
-						<div className="splitscreen">
-							<div className="left">
-								<p>About Me:</p>
-							</div>
-							<div className="right">
-								<p style={{float:'left'}} className="editable" contentEditable="true" ref={"profileBioRef"} suppressContentEditableWarning={true}>{this.state.profileBio}</p>
-							</div>
-						</div>
-						<input type="image" align="right" src="https://cdn2.iconfinder.com/data/icons/apple-classic/100/Apple_classic_10Icon_5px_grid-04-512.png" width="10%" onClick={() => this.saveButtonClick()} alt="save button"/>
-						<input type="image" align="right" src="https://image.flaticon.com/icons/png/512/60/60577.png" width="10%" onClick={() => this.backButtonClick()} alt="back button"/>
-			</form>
+				</form>
 			</div>
 		);
     }
