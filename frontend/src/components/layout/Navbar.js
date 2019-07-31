@@ -20,7 +20,8 @@ class Navbar extends Component {
 
   render() {
     const auth = this.props.auth.isAuthenticated;
-    // const user = this.props.auth.user;
+    const user = this.props.auth.user;
+	const profileURL = "profile?" + user.id;
 
 
     const LoggedOutView = props => {
@@ -63,7 +64,7 @@ class Navbar extends Component {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="profile" className="nav-link">
+                <Link to={profileURL} className="nav-link">
                   <i className="ion-gear-a"></i>&nbsp;Profile
                 </Link>
               </li>

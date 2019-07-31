@@ -10,6 +10,7 @@ import API from "./utils/API";
 import { Provider } from "react-redux";
 import store from "./store";
 
+import Navbar from "./components/layout/Navbar";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Profile from "./components/profile/profile";
@@ -27,23 +28,8 @@ class App extends Component {
       setAuthToken(token);
       // Decode token and get user info and exp
       const decoded = jwt_decode(token);
-      // Retrieve user info
-      API.get('api/user' , {
-        headers: {
-          Authorization: 'Token ' + token
-        }
-      })
-      .then(res => {
-          const data = {
-            user: res.data.user,
-            decoded: decoded
-          };
-          // Set user and isAuthenticated
-          store.dispatch(setCurrentUser(data));
-      }) 
-      .catch(err =>
-        console.log(err)
-      );  
+      store.dispatch(setCurrentUser(decoded));
+      
       // Check for expired token
       const currentTime = Date.now() / 1000; // to get in milliseconds
     
