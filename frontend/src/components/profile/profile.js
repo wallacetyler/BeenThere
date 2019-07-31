@@ -47,6 +47,40 @@ class Profile extends Component {
           this.props.history.push("/login");
         }
       }
+	  
+	componentWillReceiveProps(props){
+		var profileObjectID = props.location.search.substr(1);
+		var IsThisTheAuthenticatedUser = props.auth.user.id === profileObjectID;
+		
+		this.setState({
+			isThisTheAuthenticatedUser: IsThisTheAuthenticatedUser,
+			profileFirst: "",
+			profileLast: "",
+			profileImage: "",
+			profileMentor: "",
+			profileTagList: [],
+			profileAffiliateListString: "",
+			profileBio: '',
+			nameText: ""
+		});
+		
+		axios.get("/api/profiles/" + profileObjectID).then(
+		data => {
+			this.setState({nameText: data.data.profile.first_name + " " + data.data.profile.last_name,
+				profileFirst: data.data.profile.first_name,
+				profileLast: data.data.profile.last_name,
+				profileImage: data.data.profile.image,
+				profileMentor: (data.data.profile.is_mentor)?"Mentor":"Peer",
+				profileTagList: data.data.profile.tag_list,
+				profileAffiliateListString: data.data.profile.affiliate_list.join(", "),
+				profileBio: data.data.profile.bio
+				});
+		})
+		.catch(error => {
+			console.log(error);
+			document.location.href = "/dashboard";
+		});	
+	}
 
 	affiliateInformation() {
 		if(this.state.profileAffiliateListString === "" || this.state.profileMentor === "Peer")
@@ -75,7 +109,7 @@ class Profile extends Component {
 					<h6 className="m-2">{this.state.profileMentor}</h6>
 					<div className="d-flex flex-row">
 						{this.state.profileTagList.map(
-								x => <p className="badge badge-pill badge-light mr-2 mb-1">{x}</p>
+								x => <p className="badge badge-pill badge-light mr-2 mb-1" key={x}>{x}</p>
 						)}
 					</div>
 				</div>
