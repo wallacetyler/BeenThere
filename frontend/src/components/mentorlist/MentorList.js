@@ -23,19 +23,10 @@ class MentorList extends Component {
 	componentDidMount() {
 		API.get("/api/mentors" , { headers: { Authorization: 'Token ' + token} })
 			.then(res => {
-				console.log(res);
-				console.log(res.data);
-				console.log(res.data.mentors);
-				console.log(res.data.mentorsCount);
-				console.log("The type of the fetched data: " + typeof(res.data));
-				console.log("The type of the fetched mentors: " + typeof(res.data.mentors));
-				console.log("The type of the fetched mentorsCount: " + typeof(res.data.mentorsCount));
 				this.setState( {mentors : res.data.mentors} );
 				this.setState( {mentorsCount : res.data.mentorsCount} );  // Not used.
 				this.setState( {filtrdMentors : res.data.mentors} );
 				this.setState( {filtrdCount : res.data.mentorsCount} );
-				console.log("The type of the mentors: " + typeof(this.state.mentors));
-				console.log("The type of the mentorsCount: " + typeof(this.state.mentorsCount));
 			})
 			.catch(err => {
 				console.log(err);
@@ -50,25 +41,14 @@ class MentorList extends Component {
 	onSearchSubmit(tagInput) {
 		console.log("The input tag is: " + tagInput);
 		const mentors = this.getMentors();
-		if (tagInput == "all") {
-			console.log("The input tag equals 'all'");
-			console.log(mentors);
+		if (tagInput === "all") {
+		
 			this.setState({ searched_tag : tagInput , filtrdMentors : mentors , filtrdCount : mentors.length });
 		}
 		else {
-			console.log("The input tag does not equal 'all'");
-			const foundMentors = mentors.filter(mentor => {
-				var swtch = false;
-				for (var i = 0, len = mentor.tag_list.length; i < len; i++) {
-					if (mentor.tag_list[i] == tagInput) {
-						swtch = true;
-					}
-				}
-				if (swtch == true) {
-					return mentor;
-				}
-			});
-			console.log(foundMentors);
+		
+			const foundMentors = mentors.filter(mentor => mentor.tag_list.filter(i => i === tagInput).length >= 1);
+			
 			this.setState({ searched_tag : tagInput , filtrdMentors : foundMentors , filtrdCount : foundMentors.length });
 		}
 	}
@@ -92,13 +72,13 @@ class MentorList extends Component {
 					this.state.filtrdMentors.map((mentor) => {
 						return (
 							<Mentor
-								// A more permenant key is needed.
-								key={mentor.last_name}
+								key={mentor.id}
 								first_name={mentor.first_name}
 								last_name={mentor.last_name}
 								tag_list={mentor.tag_list}
 								bio={mentor.bio}
 								image={mentor.image}
+								id={mentor.id}
 							/>
 						);
 					})

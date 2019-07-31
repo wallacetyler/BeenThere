@@ -23,77 +23,42 @@ class Navbar extends Component {
     const user = this.props.auth.user;
 	const profileURL = "profile?" + user.id;
 
-
-    const LoggedOutView = props => {
-        if (!auth) {
-          return (
-            <ul className="nav justify-content-end align-items-center">
-              <li className="nav-item">
-                <Link to="/" className="nav-link">
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="login" className="nav-link">
-                  Sign in
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="register" className="nav-link">
-                  Sign up
-                </Link>
-              </li>
-            </ul>
-          );
-        }
-        return null;
-      };
       
-      const LoggedInView = props => {
-        if (auth) {
-          return (
-            <ul className="nav justify-content-end align-items-center">
-              <li className="nav-item">
-                <Link to="" className="nav-link">
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="example" className="nav-link">
-                  <i className="ion-compose"></i>&nbsp;New Post
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to={profileURL} className="nav-link">
-                  <i className="ion-gear-a"></i>&nbsp;Profile
-                </Link>
-              </li>
-              <li className="nav-item">
-                <button
-                  style={{textDecoration: 'none'}}
-                  onClick={this.onLogoutClick}
-                  className="btn btn-link"
-                >
-                  Logout
-                </button>
-              </li>
-            </ul>
-          );
-        }
-        return null;
-      };
-
-      return (
-          <nav className="navbar navbar-light">
+	if (auth) {
+	  return (
+		<nav className="navbar navbar-light">
             <div className="container">
-              <Link to="/" className="navbar-brand">
-                beenthere
-              </Link>
-              <LoggedOutView currentUser={this.props.user} />
-              <LoggedInView currentUser={this.props.user} />
+				<ul className="nav justify-content-end align-items-center">
+				  <li className="nav-item">
+					<Link to="" className="nav-link">
+					  Home
+					</Link>
+				  </li>
+				  <li className="nav-item">
+					<Link to="example" className="nav-link">
+					  <i className="ion-compose"></i>&nbsp;New Post
+					</Link>
+				  </li>
+				  <li className="nav-item">
+					<Link to={profileURL} className="nav-link">
+					  <i className="ion-gear-a"></i>&nbsp;Profile
+					</Link>
+				  </li>
+				  <li className="nav-item">
+					<button
+					  style={{textDecoration: 'none'}}
+					  onClick={this.onLogoutClick}
+					  className="btn btn-link"
+					>
+					  Logout
+					</button>
+				  </li>
+				</ul>
             </div>
           </nav>
-      );
+          );
+	}
+	return null;
   }
 }
 
