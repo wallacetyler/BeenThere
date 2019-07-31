@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+const token = localStorage.getItem('jwtToken');
+
 const Post = props => (
     <tr>
         <td>{props.post.title}</td>
         <td>{props.post.description}</td>
         <td>{props.post.body}</td>
         <td>
-            <Link to={"/edit/"+props.post._id}>Edit</Link>
+            <Link to={"/editpost?"+props.post.slug}>Edit</Link>
         </td>
     </tr>
 )
@@ -18,15 +20,29 @@ export default class Forum extends Component {
 
 	constructor(props) {
         super(props);
-        this.state = {posts: []};
+        this.state = {
+			posts: [],
+			postCount: 0
+			};
 
         this.postList = this.postList.bind(this);
     }
 
 	componentDidMount() {
-        axios.get('http://localhost:5000/api/posts/')
+		const auth = 
+		{
+			headers:
+			{
+				Authorization: "Token " + token
+			}
+		};
+		
+        axios.get('/api/posts/', auth)
             .then(response => {
-                this.setState({ posts: response.data });
+                this.setState({ 
+					posts: response.data.posts,
+					postCount: response.data.postCount
+					});
             })
             .catch(function (error){
                 console.log(error);

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+const token = localStorage.getItem('jwtToken');
+
 export default class EditPost extends Component {
 
 	constructor(props) {
@@ -11,11 +13,42 @@ export default class EditPost extends Component {
         this.onChangeBody = this.onChangeBody.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
+		const postSlug = props.location.search.substr(1);
+		
         this.state = {
-            title: '',
-            description: '',
-            body: ''
+            post: undefined,
+			loaded: false,
+			title: '',
+			description: '',
+			body: '',
+			slug: postSlug
         }
+		
+		const auth = 
+		{
+			headers:
+			{
+				Authorization: "Token " + token
+			}
+		};
+		
+		const apiString = "/api/posts/" + postSlug;
+		
+		axios.get(apiString, auth)
+            .then(response => {
+                this.setState({ 
+					post: response.data.post,
+					loaded: true,
+					body: response.data.post.body,
+					description: response.data.post.description,
+					title: response.data.post.title
+					});
+					
+			
+            })
+            .catch(function (error){
+                console.log(error);
+            });
     }
 
     onChangeTitle(e) {
@@ -38,33 +71,36 @@ export default class EditPost extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        const obj = {
-            title: this.state.title,
-            description: this.state.description,
-            body: this.state.body
+        const editedPost = 
+		{
+			post:
+			{
+				title: this.state.title,
+				description: this.state.description,
+				body: this.state.body
+			}
         };
-        console.log(obj);
-        axios.post('http://localhost:5000/api/posts/update/'+this.props.match.params.id, obj)
-            .then(res => console.log(res.data));
-        
-        this.props.history.push('/');
-    }
-
-    componentDidMount() {
-        axios.get('http://localhost:5000/api/posts/'+this.props.match.params.id)
-            .then(response => {
-                this.setState({
-                    title: response.data.title,
-                    description: response.data.description,
-                    body: response.data.body
-                })   
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+		const auth = 
+		{
+			headers:
+			{
+				Authorization: "Token " + token
+			}
+		};
+		
+        axios.put('http://localhost:5000/api/posts/' + this.state.slug, editedPost, auth)
+            .then(res => 
+			{
+				console.log(res.data);
+				this.props.history.push('/posts');
+			})
+		;
     }
 
     render() {
+		if(!this.state.loaded)
+			return null;
+	
         return (
             <div>
                 <h3 align="center">Edit Post</h3>
@@ -73,7 +109,7 @@ export default class EditPost extends Component {
                         <label>Title: </label>
                         <input  type="text"
                                 className="form-control"
-                                value={this.state.title}
+                                defaultValue={this.state.title}
                                 onChange={this.onChangeTitle}
                                 />
                     </div>
@@ -82,7 +118,7 @@ export default class EditPost extends Component {
                         <input 
                                 type="text" 
                                 className="form-control"
-                                value={this.state.description}
+                                defaultValue={this.state.description}
                                 onChange={this.onChangeDescription}
                                 />
                     </div>
@@ -91,7 +127,7 @@ export default class EditPost extends Component {
                         <input 
                                 type="text" 
                                 className="form-control"
-                                value={this.state.body}
+                                defaultValue={this.state.body}
                                 onChange={this.onChangeBody}
                                 />
                     </div>

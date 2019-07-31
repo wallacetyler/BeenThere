@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+const token = localStorage.getItem('jwtToken');
+
 export default class createPost extends Component {
 
 	constructor(props) {
@@ -17,6 +19,7 @@ export default class createPost extends Component {
             body: ''
         }
     }
+	
     onChangeTitle(e) {
         this.setState({
             title: e.target.value
@@ -42,14 +45,26 @@ export default class createPost extends Component {
         console.log(`Title: ${this.state.title}`);
         console.log(`Description: ${this.state.description}`);
         console.log(`Body: ${this.state.body}`);
-        
-        const newPost = {
-            title: this.state.title,
-            description: this.state.description,
-            body: this.state.body
+		
+        const auth = 
+		{
+			headers:
+			{
+				Authorization: "Token " + token
+			}
+		};
+		
+        const newPost = 
+		{
+			post:
+			{
+				title: this.state.title,
+				description: this.state.description,
+				body: this.state.body
+			}
         };
 
-        axios.post('http://localhost:5000/api/posts/', newPost)
+        axios.post('/api/posts/', newPost, auth)
             .then(res => console.log(res.data));
         
         this.setState({
