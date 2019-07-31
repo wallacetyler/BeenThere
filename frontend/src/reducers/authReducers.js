@@ -7,7 +7,6 @@ import {
   
   const initialState = {
     isAuthenticated: false,
-    decoded: {},
     user: {},
     loading: false
   };
@@ -18,8 +17,7 @@ import {
         return {
           ...state,
           isAuthenticated: !isEmpty(action.payload),
-          user: action.payload.user,
-          decoded: action.payload.decoded
+          user: action.payload
         };
       case USER_LOADING:
         return {
