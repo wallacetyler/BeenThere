@@ -24,9 +24,9 @@ class Register extends Component {
     }
 
     componentDidMount() {
-        // If logged in and user navigates to Register page, should redirect them to dashboard
+        // If logged in and user navigates to Register page, should redirect them to feed
         if (this.props.auth.isAuthenticated) {
-          this.props.history.push("/dashboard");
+          this.props.history.push("/feed");
         }
       }
 
@@ -164,6 +164,7 @@ class Register extends Component {
                                         type="radio"
                                         id="is_mentor"
                                         type="checkbox"
+                                        value={this.state.is_mentor}
                                     />
                                     <div class="state p-success-o">
                                         <label>Yes</label>

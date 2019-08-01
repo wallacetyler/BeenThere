@@ -14,7 +14,6 @@ router.post('/users', function(req, res, next) {
     user.last_name = req.body.user.last_name;
     
     if (typeof req.body.user.affiliate_list !== 'undefined') {
-        console.log('Setting affiliate_list');
         user.affiliate_list = req.body.user.affiliate_list;
     }
     

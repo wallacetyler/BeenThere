@@ -148,8 +148,6 @@ router.get('/:post', auth.optional, function(req, res, next) {
 
 // Route to update posts
 router.put('/:post', auth.required, function(req, res, next) {
-			//console.log(req.post);
-			console.log(req.body);
     User.findById(req.payload.id).then(function(user) {
         if (req.post.author._id.toString() === req.payload.id.toString()) {
 		

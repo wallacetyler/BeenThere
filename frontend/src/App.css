@@ -30,7 +30,7 @@ div.banner {
     box-shadow: inset 0 8px 8px -8px rgba(0,0,0,.3),inset 0 -8px 8px -8px rgba(0,0,0,.3);
 }
 
-div.banner > h3 {
+div.banner > h3, div.banner > div.container > h3 {
     font-size: 48px;
     text-decoration: none;
     color: white;
@@ -46,4 +46,82 @@ div.banner > img.profilePic {
     height: 100px;
     border: none;
 
+}
+
+h4.post-title {
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 600 !important;
+    font-size: 52px;
+    color: white;
+}
+
+p.post-author {
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 600 !important;
+    color: white;
+}
+
+p.post-date {
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 400 !important;
+    color: rgb(255, 227, 254);
+}
+
+img.post-avatar-image {
+    height: 50px;
+    width: 50px;
+}
+
+p.post-text {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400 !important;
+    font-size: 18px;
+}
+
+form.comment-form, div.comment-card {
+    max-width: 60%;
+    margin: auto;
+}
+
+button.comment-btn {
+    background-color: #d5a4cf;
+    border: none;
+}
+
+button.comment-btn:hover {
+    background-color: #b689b0;
+    border: none;
+}
+
+button.comment-btn:active {
+    background-color: #b689b0 !important;
+    border: none;
+}
+
+img.comment-avatar-image {
+    height: 25px;
+    width: 25px;
+}
+
+a.comment-author {
+    color: #b689b0;
+}
+
+p.comment-date {
+    color: lightgray;
+}
+
+button.post-btn {
+    background-color: #d5a4cf;
+    border: none;
+}
+
+button.post-btn:hover {
+    background-color: #b689b0;
+    border: none;
+}
+
+button.post-btn:active {
+    background-color: #b689b0 !important;
+    border: none;
 }

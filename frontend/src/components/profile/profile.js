@@ -37,14 +37,14 @@ class Profile extends Component {
 		})
 		.catch(error => {
 			console.log(error);
-			document.location.href = "/dashboard";
+			document.location.href = "/feed";
 		});
     }
 
     componentDidMount() {
         // If not logged in and tries to load this page, kick them to the login page.
         if (!this.props.auth.isAuthenticated) {
-          this.props.history.push("/login");
+          this.props.history.push("/");
         }
       }
 	  
@@ -78,7 +78,7 @@ class Profile extends Component {
 		})
 		.catch(error => {
 			console.log(error);
-			document.location.href = "/dashboard";
+			document.location.href = "/feed";
 		});	
 	}
 

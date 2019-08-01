@@ -31,7 +31,6 @@ class MentorList extends Component {
 			})
 			.catch(err => {
 				console.log(err);
-				console.log("Error");
 			})
 	}
 
@@ -40,7 +39,6 @@ class MentorList extends Component {
 	}
 
 	onSearchSubmit(tagInput) {
-		console.log("The input tag is: " + tagInput);
 		const mentors = this.getMentors();
 		if (tagInput === "") {
 		
