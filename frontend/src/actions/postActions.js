@@ -54,6 +54,9 @@ export function postComment(post_slug, token, comment) {
             .then((res) => {
                 console.log(res)
                 dispatch({type:POST_COMMENT, comment})
+				//if the comment was successfully posted then refresh the pageX
+				if(res.status == 200)
+					document.location.reload();
             })
             .catch((err) => {
                 console.log(err)

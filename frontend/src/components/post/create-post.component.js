@@ -62,6 +62,7 @@ export default class createPost extends Component {
         };
 
         axios.post('/api/posts/', newPost, auth)
+		.then(resp => { if(resp.status == 200) document.location.href = "/feed"; });
         
         this.setState({
             title: '',
