@@ -35,7 +35,7 @@ class ProfileEditor extends Component {
 		})
 		.catch(error => {
 			console.log(error);
-			document.location.href = "/dashboard";
+			document.location.href = "/feed";
 		});
 	}
 
@@ -103,7 +103,6 @@ class ProfileEditor extends Component {
 	assignMentorValue() {
 		
 		this.setState({ profileIsMentor: this.refs.mentorRef.checked});
-		console.log(this.state.profileIsMentor);
 	}
 
     render() {
@@ -112,7 +111,7 @@ class ProfileEditor extends Component {
 				<div className="banner d-flex flex-row justify-content-center align-items-center mb-3">
 					<h3>Edit Profile</h3>
 				</div>
-				<form className="mx-auto w-50">
+				<form className="mx-auto w-50 mb-4">
 					<div className="form-group">
 						<label htmlFor="profilePic">Profile Picture</label>
 						<input 

@@ -91,7 +91,6 @@ export default class EditPost extends Component {
         axios.put('http://localhost:5000/api/posts/' + this.state.slug, editedPost, auth)
             .then(res => 
 			{
-				console.log(res.data);
 				this.props.history.push('/posts');
 			})
 		;

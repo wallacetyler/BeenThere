@@ -28,31 +28,35 @@ class Navbar extends Component {
 	  return (
 		<nav className="navbar navbar-light">
             <div className="container">
-				<a className="navbar-brand" href="/">beenthere</a>
+				<a className="navbar-brand" href="/feed">beenthere</a>
 				<ul className="nav justify-content-end align-items-center">
 				  <li className="nav-item">
-					<Link to="" className="nav-link">
+					<Link to="/feed" className="nav-link">
 					  Home
 					</Link>
 				  </li>
 				  <li className="nav-item">
-					<Link to="mentors" className="nav-link">
+					<Link to="/mentors" className="nav-link">
 					  Mentors
 					</Link>
 				  </li>
 				  <li className="nav-item">
-					<Link to="example" className="nav-link">
-					  Posts
+					<Link to="/createpost" className="nav-link">
+					  New Post
 					</Link>
 				  </li>
 				  <li className="nav-item">
-					<Link to={profileURL} className="nav-link">
-					  <i className="ion-gear-a"></i>&nbsp;Profile
+					<Link to={`/${profileURL}`} className="nav-link">
+					  Profile
 					</Link>
 				  </li>
 				  <li className="nav-item">
 					<button
-					  style={{textDecoration: 'none'}}
+					  style={{
+						  textDecoration: 'none',
+						  padding: '8px 16px',
+						  margin: '0 0 0 16px'
+						}}
 					  onClick={this.onLogoutClick}
 					  className="btn btn-link"
 					>

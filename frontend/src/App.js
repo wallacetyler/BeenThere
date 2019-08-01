@@ -9,18 +9,18 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import { Provider } from "react-redux";
 import store from "./store";
 
+import PrivateRoute from "./components/private-route/PrivateRoute";
 import Navbar from "./components/layout/Navbar";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Profile from "./components/profile/profile";
 import ProfileEditor from "./components/profile/profileEditor";
-import PrivateRoute from "./components/private-route/PrivateRoute";
 import Forum from "./components/post/forum.component";
 import CreatePost from "./components/post/create-post.component";
 import EditPost from "./components/post/edit-post.component";
-import Dashboard from "./components/dashboard/Dashboard";
 import MentorList from "./components/mentorlist/MentorList";
-import Example from "./components/example";
+import Feed from "./components/post/Feed";
+import PostView from "./components/post/PostView";
 
 class App extends Component {
   componentWillMount() {
@@ -55,14 +55,15 @@ class App extends Component {
             <Route exact path="/" component={Login} />
             <Route exact path="/register" component={Register} />
             <Switch>
-              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/feed" component={Feed} />
+              <PrivateRoute exact path="/post/:slug" component={PostView} />
+              {/* <PrivateRoute exact path="/post/:id/edit" component={EditPost} /> */}
               <PrivateRoute exact path="/posts" component={Forum} />
               <PrivateRoute exact path="/createpost" component={CreatePost} />
               <PrivateRoute exact path="/editpost" component={EditPost} />
 							<PrivateRoute exact path="/mentors" component={MentorList} />
               <PrivateRoute exact path="/profile" component={Profile} />
               <PrivateRoute exact path="/profileEditor" component={ProfileEditor} />
-              <PrivateRoute exact path="/example" component={Example} />
             </Switch>
           </div>
         </Router>

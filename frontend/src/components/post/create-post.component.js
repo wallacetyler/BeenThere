@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import './post.css';
 
 const token = localStorage.getItem('jwtToken');
+
 
 export default class createPost extends Component {
 
@@ -41,11 +43,6 @@ export default class createPost extends Component {
     onSubmit(e) {
         e.preventDefault();
         
-        console.log(`Post submitted:`);
-        console.log(`Title: ${this.state.title}`);
-        console.log(`Description: ${this.state.description}`);
-        console.log(`Body: ${this.state.body}`);
-		
         const auth = 
 		{
 			headers:
@@ -65,7 +62,6 @@ export default class createPost extends Component {
         };
 
         axios.post('/api/posts/', newPost, auth)
-            .then(res => console.log(res.data));
         
         this.setState({
             title: '',
@@ -76,39 +72,45 @@ export default class createPost extends Component {
 
     render() {
         return (
-            <div style={{marginTop: 10}}>
-            	<h3>Create Post</h3>
-                <form onSubmit={this.onSubmit}>
-                    <div className="form-group"> 
-                        <label>Title: </label>
-                        <input  type="text"
-                                className="form-control"
-                                value={this.state.title}
-                                onChange={this.onChangeTitle}
-                                />
+            <div>
+                <div className="banner d-flex flex-row justify-content-center align-items-center">
+                    <h3>Create Post</h3>
+                </div>
+                    <div className="container d-flex justify-content-center">
+                        <form onSubmit={this.onSubmit} className="create-post my-4">
+                            <div className="form-group"> 
+                                <label>Title: </label>
+                                <input  type="text"
+                                        className="form-control"
+                                        value={this.state.title}
+                                        onChange={this.onChangeTitle}
+                                        />
+                            </div>
+                            <div className="form-group">
+                                <label>Description: </label>
+                                <input 
+                                        type="text" 
+                                        className="form-control"
+                                        value={this.state.description}
+                                        onChange={this.onChangeDescription}
+                                        />
+                            </div>
+                            <div className="form-group">
+                                <label>Body: </label>
+                                <textarea 
+                                        type="text" 
+                                        className="form-control"
+                                        value={this.state.body}
+                                        onChange={this.onChangeBody}
+                                        />
+                            </div>
+                            <div className="form-group">
+                                <button type="submit" value="Create Post" className="btn btn-primary post-btn">
+                                    Create Post    
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    <div className="form-group">
-                        <label>Description: </label>
-                        <input 
-                                type="text" 
-                                className="form-control"
-                                value={this.state.description}
-                                onChange={this.onChangeDescription}
-                                />
-                    </div>
-                    <div className="form-group">
-                        <label>Body: </label>
-                        <input 
-                                type="text" 
-                                className="form-control"
-                                value={this.state.body}
-                                onChange={this.onChangeBody}
-                                />
-                    </div>
-                    <div className="form-group">
-                        <input type="submit" value="Create Post" className="btn btn-primary" />
-                    </div>
-                </form>
             </div>
  
         )
