@@ -16,7 +16,8 @@ class MentorList extends Component {
 			mentorsCount : 0,   // Not used.
 			filtrdMentors : [],
 			filtrdCount : 0,
-			searched_tag : 'all'
+			searched_tag : 'all',
+			loading: true
 		}
 		this.onSearchSubmit = this.onSearchSubmit.bind(this);
 	}
@@ -24,10 +25,13 @@ class MentorList extends Component {
 	componentDidMount() {
 		API.get("/api/mentors" , { headers: { Authorization: 'Token ' + token} })
 			.then(res => {
-				this.setState( {mentors : res.data.mentors} );
-				this.setState( {mentorsCount : res.data.mentorsCount} );  // Not used.
-				this.setState( {filtrdMentors : res.data.mentors} );
-				this.setState( {filtrdCount : res.data.mentorsCount} );
+				this.setState({
+					mentors : res.data.mentors,
+					mentorsCount : res.data.mentorsCount,
+					filtrdMentors : res.data.mentors,
+					filtrdCount : res.data.mentorsCount,
+					loading: false
+					});
 			})
 			.catch(err => {
 				console.log(err);
@@ -53,6 +57,9 @@ class MentorList extends Component {
 	}
 
 	render() {
+		if(this.state.loading)
+			return null;
+	
 		return (
 			<center>
 			<div>
